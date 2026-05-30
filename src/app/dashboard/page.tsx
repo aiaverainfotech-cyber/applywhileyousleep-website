@@ -35,7 +35,7 @@ export default function DashboardPage() {
     try {
       const res = await fetch("/api/razorpay/create-subscription", { method: "POST" });
       const data = await res.json();
-      if (!res.ok) { alert(data.error); return; }
+      if (!res.ok) { alert("Payment error: " + (data.error || "Unknown error")); return; }
 
       const rzp = new (window as any).Razorpay({
         key: data.key_id,

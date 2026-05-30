@@ -24,20 +24,32 @@ export async function POST() {
   if (user.subscription_status === "active" && user.razorpay_subscription_id)
     return NextResponse.json({ subscription_id: user.razorpay_subscription_id });
 
-  const razorpay = getRazorpay();
-  const subscription = await (razorpay.subscriptions as any).create({
-    plan_id: process.env.RAZORPAY_PLAN_ID!,
-    total_count: 12,
-    quantity: 1,
-    customer_notify: 1,
-    notes: { user_id: user.id, email: user.email },
-  });
+  if (!process.env.RAZORPAY_KEY_ID || !process.env.RAZORPAY_KEY_SECRET)
+    return NextResponse.json({ error: "Razorpay keys not configured." }, { status: 500 });
+  if (!process.env.RAZORPAY_PLAN_ID)
+    return NextResponse.json({ error: "Razorpay Plan ID not configured." }, { status: 500 });
 
-  await db.query("UPDATE users SET razorpay_subscription_id = $1 WHERE id = $2",
-    [subscription.id, user.id]);
+  try {
+    const razorpay = getRazorpay();
+    const subscription = await (razorpay.subscriptions as any).create({
+      plan_id: process.env.RAZORPAY_PLAN_ID,
+      total_count: 12,
+      quantity: 1,
+      customer_notify: 1,
+      notes: { user_id: user.id, email: user.email },
+    });
 
-  return NextResponse.json({
-    subscription_id: subscription.id,
-    key_id: process.env.RAZORPAY_KEY_ID,
-  });
+    await db.query("UPDATE users SET razorpay_subscription_id = $1 WHERE id = $2",
+      [subscription.id, user.id]);
+
+    return NextResponse.json({
+      subscription_id: subscription.id,
+      key_id: process.env.RAZORPAY_KEY_ID,
+    });
+  } catch (rzpErr: any) {
+    console.error("[razorpay]", rzpErr);
+    return NextResponse.json({
+      error: rzpErr?.error?.description || rzpErr?.message || "Razorpay error",
+    }, { status: 500 });
+  }
 }
