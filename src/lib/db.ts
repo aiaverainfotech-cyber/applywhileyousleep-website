@@ -2,14 +2,15 @@ import { DatabaseSync } from "node:sqlite";
 import path from "path";
 import fs from "fs";
 
-const DB_DIR = path.join(process.cwd(), "data");
+// Vercel's filesystem is read-only except /tmp
+const DB_DIR = process.env.VERCEL ? "/tmp" : path.join(process.cwd(), "data");
 const DB_PATH = path.join(DB_DIR, "awys.db");
 
 let _db: DatabaseSync | null = null;
 
 export function getDb(): DatabaseSync {
   if (_db) return _db;
-  fs.mkdirSync(DB_DIR, { recursive: true });
+  if (!process.env.VERCEL) fs.mkdirSync(DB_DIR, { recursive: true });
   _db = new DatabaseSync(DB_PATH);
   migrate(_db);
   return _db;
