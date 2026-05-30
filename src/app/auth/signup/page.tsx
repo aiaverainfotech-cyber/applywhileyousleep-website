@@ -39,7 +39,7 @@ export default function SignupPage() {
             <span className="text-blue-400">WhileYouSleep</span>
           </Link>
           <h1 className="text-2xl font-bold mt-4">Create your account</h1>
-          <p className="text-gray-400 text-sm mt-1">Start your 1-month subscription for ₹499</p>
+          <p className="text-gray-400 text-sm mt-1">Start your 1-month subscription for ₹199</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">

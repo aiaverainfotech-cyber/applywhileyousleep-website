@@ -41,7 +41,7 @@ export default function DashboardPage() {
         key: data.key_id,
         subscription_id: data.subscription_id,
         name: "ApplyWhileYouSleep",
-        description: "Monthly Subscription — ₹499/month",
+        description: "Monthly Subscription — ₹199/month",
         theme: { color: "#2563eb" },
         handler: () => {
           alert("Payment successful! Your subscription is being activated. Refresh in a moment.");
@@ -122,7 +122,7 @@ export default function DashboardPage() {
                   disabled={payLoading}
                   className="px-6 py-3 bg-blue-600 hover:bg-blue-500 disabled:opacity-50 rounded-lg font-semibold transition"
                 >
-                  {payLoading ? "Loading..." : "Pay ₹499 / month"}
+                  {payLoading ? "Loading..." : "Pay ₹199 / month"}
                 </button>
               )}
               {isActive && (

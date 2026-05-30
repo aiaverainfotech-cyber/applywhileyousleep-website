@@ -10,7 +10,7 @@ const features = [
 ];
 
 const steps = [
-  { num: "01", title: "Create Account & Pay", desc: "Sign up and subscribe for ₹499/month." },
+  { num: "01", title: "Create Account & Pay", desc: "Sign up and subscribe for ₹199/month." },
   { num: "02", title: "Download & Install", desc: "Download the app and run it on your Windows PC." },
   { num: "03", title: "Setup Profile", desc: "Upload your resume or fill your profile. Set your job preferences." },
   { num: "04", title: "Login to Platforms", desc: "Log into LinkedIn and Naukri inside the app once. Session saved." },
@@ -58,7 +58,7 @@ export default function LandingPage() {
             href="/auth/signup"
             className="px-8 py-4 bg-blue-600 hover:bg-blue-500 rounded-xl font-semibold text-lg transition"
           >
-            Start for ₹499/month
+            Start for ₹199/month
           </Link>
           <a
             href="#how-it-works"
@@ -105,7 +105,7 @@ export default function LandingPage() {
         <h2 className="text-3xl font-bold mb-10">Simple Pricing</h2>
         <div className="bg-gray-900 border border-blue-500/40 rounded-2xl p-8">
           <div className="text-gray-400 mb-2">Monthly Plan</div>
-          <div className="text-5xl font-bold mb-1">₹499</div>
+          <div className="text-5xl font-bold mb-1">₹199</div>
           <div className="text-gray-400 text-sm mb-6">per month · cancel anytime</div>
           <ul className="text-left space-y-3 mb-8 text-sm text-gray-300">
             {[
