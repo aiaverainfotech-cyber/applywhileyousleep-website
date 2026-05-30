@@ -174,10 +174,10 @@ export default function DashboardPage() {
             </p>
             {isActive ? (
               <a
-                href="/downloads/applywhileyousleep-setup.zip"
+                href="https://github.com/aiaverainfotech-cyber/applywhileyousleep-website/releases/download/v1.0.0/ApplyWhileYouSleep-Setup.exe"
                 className="inline-block px-6 py-3 bg-blue-600 hover:bg-blue-500 rounded-lg font-semibold transition"
               >
-                Download for Windows
+                Download for Windows (.exe · 284 MB)
               </a>
             ) : (
               <div className="text-gray-500 text-sm">Activate your subscription to unlock the download.</div>
