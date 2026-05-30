@@ -33,19 +33,34 @@ export default function DashboardPage() {
   async function handlePayment() {
     setPayLoading(true);
     try {
-      const res = await fetch("/api/razorpay/create-subscription", { method: "POST" });
+      const res = await fetch("/api/razorpay/create-order", { method: "POST" });
       const data = await res.json();
       if (!res.ok) { alert("Payment error: " + (data.error || "Unknown error")); return; }
 
       const rzp = new (window as any).Razorpay({
         key: data.key_id,
-        subscription_id: data.subscription_id,
+        order_id: data.order_id,
+        amount: data.amount,
+        currency: data.currency,
         name: "ApplyWhileYouSleep",
-        description: "Monthly Subscription — ₹199/month",
+        description: "30-day subscription — ₹199",
         theme: { color: "#2563eb" },
-        handler: () => {
-          alert("Payment successful! Your subscription is being activated. Refresh in a moment.");
-          window.location.reload();
+        handler: async (response: any) => {
+          const verifyRes = await fetch("/api/razorpay/verify-payment", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              razorpay_order_id: response.razorpay_order_id,
+              razorpay_payment_id: response.razorpay_payment_id,
+              razorpay_signature: response.razorpay_signature,
+            }),
+          });
+          if (verifyRes.ok) {
+            alert("Payment successful! Your subscription is now active.");
+            window.location.reload();
+          } else {
+            alert("Payment received but verification failed. Please contact support.");
+          }
         },
       });
       rzp.open();
