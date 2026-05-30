@@ -7,10 +7,12 @@ export async function GET() {
   if (!session)
     return NextResponse.json({ error: "Not authenticated." }, { status: 401 });
 
-  const db = getDb();
-  const user = db.prepare(
-    "SELECT id, email, license_key, subscription_status, subscription_expires_at, created_at FROM users WHERE id = ?"
-  ).get(session.userId) as any;
+  const db = await getDb();
+  const result = await db.query(
+    "SELECT id, email, license_key, subscription_status, subscription_expires_at, created_at FROM users WHERE id = $1",
+    [session.userId]
+  );
+  const user = result.rows[0];
 
   if (!user)
     return NextResponse.json({ error: "User not found." }, { status: 404 });

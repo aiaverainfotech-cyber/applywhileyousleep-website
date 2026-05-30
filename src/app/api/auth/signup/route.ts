@@ -14,19 +14,20 @@ export async function POST(req: NextRequest) {
     if (password.length < 8)
       return NextResponse.json({ error: "Password must be at least 8 characters." }, { status: 400 });
 
-    const db = getDb();
-    const existing = db.prepare("SELECT id FROM users WHERE email = ?").get(email.toLowerCase().trim());
-    if (existing)
+    const db = await getDb();
+    const existing = await db.query("SELECT id FROM users WHERE email = $1", [email.toLowerCase().trim()]);
+    if (existing.rows.length > 0)
       return NextResponse.json({ error: "An account with this email already exists." }, { status: 409 });
 
     const id = uuidv4();
     const password_hash = await bcrypt.hash(password, 12);
     const license_key = generateLicenseKey();
 
-    db.prepare(`
-      INSERT INTO users (id, email, password_hash, license_key, subscription_status)
-      VALUES (?, ?, ?, ?, 'inactive')
-    `).run(id, email.toLowerCase().trim(), password_hash, license_key);
+    await db.query(
+      `INSERT INTO users (id, email, password_hash, license_key, subscription_status)
+       VALUES ($1, $2, $3, $4, 'inactive')`,
+      [id, email.toLowerCase().trim(), password_hash, license_key]
+    );
 
     const token = await signToken({ userId: id, email: email.toLowerCase().trim() });
     const res = NextResponse.json({ success: true, license_key }, { status: 201 });

@@ -10,8 +10,9 @@ export async function POST(req: NextRequest) {
     if (!email || !password)
       return NextResponse.json({ error: "Email and password required." }, { status: 400 });
 
-    const db = getDb();
-    const user = db.prepare("SELECT * FROM users WHERE email = ?").get(email.toLowerCase().trim()) as any;
+    const db = await getDb();
+    const result = await db.query("SELECT * FROM users WHERE email = $1", [email.toLowerCase().trim()]);
+    const user = result.rows[0];
 
     if (!user)
       return NextResponse.json({ error: "Invalid email or password." }, { status: 401 });

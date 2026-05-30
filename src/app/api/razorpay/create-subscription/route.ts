@@ -15,15 +15,14 @@ export async function POST() {
   if (!session)
     return NextResponse.json({ error: "Not authenticated." }, { status: 401 });
 
-  const db = getDb();
-  const user = db.prepare("SELECT * FROM users WHERE id = ?").get(session.userId) as any;
+  const db = await getDb();
+  const result = await db.query("SELECT * FROM users WHERE id = $1", [session.userId]);
+  const user = result.rows[0];
   if (!user)
     return NextResponse.json({ error: "User not found." }, { status: 404 });
 
-  // If already active, return existing subscription
-  if (user.subscription_status === "active" && user.razorpay_subscription_id) {
+  if (user.subscription_status === "active" && user.razorpay_subscription_id)
     return NextResponse.json({ subscription_id: user.razorpay_subscription_id });
-  }
 
   const razorpay = getRazorpay();
   const subscription = await (razorpay.subscriptions as any).create({
@@ -34,8 +33,8 @@ export async function POST() {
     notes: { user_id: user.id, email: user.email },
   });
 
-  db.prepare("UPDATE users SET razorpay_subscription_id = ? WHERE id = ?")
-    .run(subscription.id, user.id);
+  await db.query("UPDATE users SET razorpay_subscription_id = $1 WHERE id = $2",
+    [subscription.id, user.id]);
 
   return NextResponse.json({
     subscription_id: subscription.id,

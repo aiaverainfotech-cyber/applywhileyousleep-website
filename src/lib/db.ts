@@ -1,36 +1,31 @@
-import { DatabaseSync } from "node:sqlite";
-import path from "path";
-import fs from "fs";
+import { Pool } from "pg";
 
-// Vercel's filesystem is read-only except /tmp
-const DB_DIR = process.env.VERCEL ? "/tmp" : path.join(process.cwd(), "data");
-const DB_PATH = path.join(DB_DIR, "awys.db");
+let _pool: Pool | null = null;
 
-let _db: DatabaseSync | null = null;
-
-export function getDb(): DatabaseSync {
-  if (_db) return _db;
-  if (!process.env.VERCEL) fs.mkdirSync(DB_DIR, { recursive: true });
-  _db = new DatabaseSync(DB_PATH);
-  migrate(_db);
-  return _db;
+export function getPool(): Pool {
+  if (_pool) return _pool;
+  _pool = new Pool({ connectionString: process.env.DATABASE_URL, ssl: { rejectUnauthorized: false } });
+  return _pool;
 }
 
-function migrate(db: DatabaseSync) {
-  db.exec(`
-    PRAGMA journal_mode=WAL;
-    PRAGMA foreign_keys=ON;
+export async function getDb() {
+  const pool = getPool();
+  await migrate(pool);
+  return pool;
+}
 
+async function migrate(pool: Pool) {
+  await pool.query(`
     CREATE TABLE IF NOT EXISTS users (
       id TEXT PRIMARY KEY,
       email TEXT UNIQUE NOT NULL,
       password_hash TEXT NOT NULL,
       license_key TEXT UNIQUE NOT NULL,
       subscription_status TEXT NOT NULL DEFAULT 'inactive',
-      subscription_expires_at TEXT,
+      subscription_expires_at TIMESTAMPTZ,
       razorpay_subscription_id TEXT,
       razorpay_payment_id TEXT,
-      created_at TEXT NOT NULL DEFAULT (datetime('now'))
+      created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
     );
   `);
 }
