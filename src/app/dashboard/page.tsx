@@ -169,15 +169,15 @@ export default function DashboardPage() {
           <div className="bg-gray-900 border border-gray-800 rounded-xl p-6">
             <h2 className="text-lg font-semibold mb-1">Download the App</h2>
             <p className="text-gray-400 text-sm mb-4">
-              Windows only. Requires Python 3.12+. Run <code className="text-blue-300">install.bat</code> once,
-              then <code className="text-blue-300">start.bat</code> every time.
+              Windows 10/11 only. No Python or Node.js needed — everything is included.
+              Just download and double-click to install.
             </p>
             {isActive ? (
               <a
-                href="https://github.com/aiaverainfotech-cyber/applywhileyousleep-website/releases/download/v1.0.0/ApplyWhileYouSleep-Setup.exe"
+                href="https://github.com/aiaverainfotech-cyber/applywhileyousleep-website/releases/download/v1.0.0/ApplyWhileYouSleep-Install.bat"
                 className="inline-block px-6 py-3 bg-blue-600 hover:bg-blue-500 rounded-lg font-semibold transition"
               >
-                Download for Windows (.exe · 284 MB)
+                Download for Windows
               </a>
             ) : (
               <div className="text-gray-500 text-sm">Activate your subscription to unlock the download.</div>
@@ -188,9 +188,9 @@ export default function DashboardPage() {
           <div className="bg-gray-900 border border-gray-800 rounded-xl p-6">
             <h2 className="text-lg font-semibold mb-4">Setup Instructions</h2>
             <ol className="space-y-3 text-sm text-gray-300 list-decimal list-inside">
-              <li>Download and extract the zip file above.</li>
-              <li>Double-click <code className="text-blue-300">install.bat</code> — this installs dependencies (one time only).</li>
-              <li>Double-click <code className="text-blue-300">start.bat</code> — the app opens in your browser at localhost:3000.</li>
+              <li>Click <strong>Download for Windows</strong> above — saves <code className="text-blue-300">ApplyWhileYouSleep-Install.bat</code></li>
+              <li>Double-click the downloaded file — it will download and install the app automatically (~484 MB)</li>
+              <li>A desktop shortcut <strong>ApplyWhileYouSleep</strong> will be created</li>
               <li>On first launch, enter your license key: <code className="text-blue-300">{user.license_key}</code></li>
               <li>Upload your resume or fill your profile manually.</li>
               <li>Click &quot;Login Setup&quot; tab to log into LinkedIn and Naukri.</li>
