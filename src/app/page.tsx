@@ -131,6 +131,56 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* System Requirements */}
+      <section className="max-w-4xl mx-auto px-6 py-12">
+        <h2 className="text-2xl font-bold text-center mb-8">System Requirements</h2>
+        <div className="grid md:grid-cols-2 gap-6">
+          <div className="bg-gray-900 border border-gray-800 rounded-xl p-6">
+            <h3 className="font-semibold text-green-400 mb-3">Minimum Requirements</h3>
+            <ul className="space-y-2 text-sm text-gray-300">
+              {[
+                "Windows 10 or Windows 11",
+                "4 GB RAM or more",
+                "2 GB free storage space",
+                "Internet connection (any broadband)",
+                "Any modern laptop/PC (2018 or newer)",
+              ].map(r => <li key={r} className="flex gap-2"><span className="text-green-400">✓</span>{r}</li>)}
+            </ul>
+          </div>
+          <div className="bg-gray-900 border border-gray-800 rounded-xl p-6">
+            <h3 className="font-semibold text-yellow-400 mb-3">Important to Know</h3>
+            <ul className="space-y-2 text-sm text-gray-300">
+              {[
+                "App runs on YOUR computer — your account stays safe",
+                "PC must be ON for autopilot to work",
+                "You log into LinkedIn/Naukri yourself (one time)",
+                "Apply at a natural pace to avoid platform restrictions",
+                "Works on Windows only (Mac version coming soon)",
+              ].map(r => <li key={r} className="flex gap-2"><span className="text-yellow-400">⚠</span>{r}</li>)}
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="max-w-2xl mx-auto px-6 py-12">
+        <h2 className="text-2xl font-bold text-center mb-8">Common Questions</h2>
+        <div className="space-y-4">
+          {[
+            { q: "Will my LinkedIn/Naukri account get banned?", a: "The app applies at a human-like pace with random delays, from your own IP address. This is much safer than bulk applying manually. We recommend applying to 15-20 jobs per day for best results." },
+            { q: "Do I need to keep my laptop on all the time?", a: "Only when you want autopilot running. You can also manually start a scan whenever you want — no need to keep it on 24/7." },
+            { q: "What if the app doesn't work on my laptop?", a: "Minimum requirement is 4GB RAM and Windows 10/11. If there are any issues, contact us and we will help you set it up." },
+            { q: "Is my resume and personal data safe?", a: "Yes. Everything stays on your own computer. We never store your resume, LinkedIn password, or personal details on our servers." },
+            { q: "Can I cancel anytime?", a: "Yes. Cancel anytime from your account dashboard. No questions asked." },
+          ].map(({ q, a }) => (
+            <div key={q} className="bg-gray-900 border border-gray-800 rounded-xl p-5">
+              <div className="font-semibold text-white mb-2">{q}</div>
+              <div className="text-gray-400 text-sm">{a}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* Footer */}
       <footer className="border-t border-gray-800 py-8 text-center text-gray-500 text-sm">
         © {new Date().getFullYear()} ApplyWhileYouSleep · Built for serious job seekers
