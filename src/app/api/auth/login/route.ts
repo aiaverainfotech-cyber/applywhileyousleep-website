@@ -25,8 +25,8 @@ export async function POST(req: NextRequest) {
     const res = NextResponse.json({ success: true });
     setTokenCookie(token, res);
     return res;
-  } catch (err) {
+  } catch (err: any) {
     console.error("[login]", err);
-    return NextResponse.json({ error: "Login failed. Please try again." }, { status: 500 });
+    return NextResponse.json({ error: "Login failed.", detail: err?.message || String(err) }, { status: 500 });
   }
 }
