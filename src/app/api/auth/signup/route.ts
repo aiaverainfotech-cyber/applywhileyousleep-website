@@ -33,8 +33,8 @@ export async function POST(req: NextRequest) {
     const res = NextResponse.json({ success: true, license_key }, { status: 201 });
     setTokenCookie(token, res);
     return res;
-  } catch (err) {
+  } catch (err: any) {
     console.error("[signup]", err);
-    return NextResponse.json({ error: "Signup failed. Please try again." }, { status: 500 });
+    return NextResponse.json({ error: "Signup failed.", detail: err?.message || String(err) }, { status: 500 });
   }
 }
