@@ -43,7 +43,7 @@ export default function DashboardPage() {
         amount: data.amount,
         currency: data.currency,
         name: "ApplyWhileYouSleep",
-        description: "30-day subscription — ₹199",
+        description: "30-day subscription - Rs.199",
         theme: { color: "#2563eb" },
         handler: async (response: any) => {
           const verifyRes = await fetch("/api/razorpay/verify-payment", {
@@ -97,11 +97,9 @@ export default function DashboardPage() {
 
   return (
     <>
-      {/* Razorpay SDK */}
       <script src="https://checkout.razorpay.com/v1/checkout.js" async />
 
       <div className="min-h-screen">
-        {/* Nav */}
         <nav className="border-b border-gray-800 px-6 py-4 flex items-center justify-between max-w-4xl mx-auto">
           <span className="font-bold">
             <span className="text-white">Apply</span>
@@ -115,7 +113,6 @@ export default function DashboardPage() {
         <div className="max-w-4xl mx-auto px-6 py-10 space-y-6">
           <h1 className="text-2xl font-bold">My Account</h1>
 
-          {/* Subscription Status */}
           <div className="bg-gray-900 border border-gray-800 rounded-xl p-6">
             <h2 className="text-lg font-semibold mb-4">Subscription</h2>
             <div className="flex items-center justify-between flex-wrap gap-4">
@@ -137,16 +134,15 @@ export default function DashboardPage() {
                   disabled={payLoading}
                   className="px-6 py-3 bg-blue-600 hover:bg-blue-500 disabled:opacity-50 rounded-lg font-semibold transition"
                 >
-                  {payLoading ? "Loading..." : "Pay ₹199 / month"}
+                  {payLoading ? "Loading..." : "Pay Rs.199 / month"}
                 </button>
               )}
               {isActive && (
-                <span className="text-green-400 text-sm font-medium">✓ Subscription active</span>
+                <span className="text-green-400 text-sm font-medium">Subscription active</span>
               )}
             </div>
           </div>
 
-          {/* License Key */}
           <div className="bg-gray-900 border border-gray-800 rounded-xl p-6">
             <h2 className="text-lg font-semibold mb-1">Your License Key</h2>
             <p className="text-gray-400 text-sm mb-4">
@@ -165,40 +161,38 @@ export default function DashboardPage() {
             </div>
           </div>
 
-          {/* Download */}
           <div className="bg-gray-900 border border-gray-800 rounded-xl p-6">
             <h2 className="text-lg font-semibold mb-1">Download the App</h2>
             <p className="text-gray-400 text-sm mb-4">
-              Windows 10/11 only. No Python or Node.js needed — everything is included.
-              Just download and double-click to install.
+              Windows 10/11 only. The installer automatically sets up everything for you.
+              After downloading, right-click the file and select Run as administrator.
             </p>
             {isActive ? (
               <a
-                href="https://github.com/aiaverainfotech-cyber/applywhileyousleep-website/releases/download/v1.0.2.zip/ApplyWhileYouSleep-v1.0.2.zip"
+                href="https://github.com/aiaverainfotech-cyber/applywhileyousleep-website/releases/download/v1.0.3/ApplyWhileYouSleep-Install.bat"
                 className="inline-block px-6 py-3 bg-blue-600 hover:bg-blue-500 rounded-lg font-semibold transition"
               >
-                Download for Windows (.zip)
+                Download for Windows v1.0.3 (.bat)
               </a>
             ) : (
               <div className="text-gray-500 text-sm">Activate your subscription to unlock the download.</div>
             )}
           </div>
 
-          {/* Setup instructions */}
           <div className="bg-gray-900 border border-gray-800 rounded-xl p-6">
             <h2 className="text-lg font-semibold mb-4">Setup Instructions</h2>
             <ol className="space-y-3 text-sm text-gray-300 list-decimal list-inside">
-              <li>Click <strong>Download for Windows</strong> above — saves a ZIP file</li>
-              <li>Extract the ZIP to any folder (right-click → Extract All)</li>
-              <li>Double-click <code className="text-blue-300">ApplyWhileYouSleep-Install.bat</code> inside the extracted folder</li>
+              <li>Click <strong>Download for Windows v1.0.3</strong> above</li>
+              <li>Right-click the downloaded <code className="text-blue-300">ApplyWhileYouSleep-Install.bat</code> and select <strong>Run as administrator</strong></li>
+              <li>If Windows shows a blue or yellow warning, click <strong>More info</strong> then <strong>Run anyway</strong></li>
+              <li>The installer sets up everything automatically (takes 3-5 minutes)</li>
               <li>On first launch, enter your license key: <code className="text-blue-300">{user.license_key}</code></li>
               <li>Upload your resume or fill your profile manually.</li>
-              <li>Click &quot;Login Setup&quot; tab to log into LinkedIn and Naukri.</li>
-              <li>Set your job preferences and click &quot;Start Autopilot&quot;.</li>
+              <li>Click the Login Setup tab to log into LinkedIn and Naukri.</li>
+              <li>Set your job preferences and click Start Autopilot.</li>
             </ol>
           </div>
 
-          {/* Account info */}
           <div className="bg-gray-900 border border-gray-800 rounded-xl p-6">
             <h2 className="text-lg font-semibold mb-3">Account Details</h2>
             <div className="text-sm text-gray-400 space-y-1">
