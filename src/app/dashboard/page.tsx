@@ -163,13 +163,13 @@ export default function DashboardPage() {
 
           <div className="bg-gray-900 border border-gray-800 rounded-xl p-6">
             <h2 className="text-lg font-semibold mb-1">Download the App</h2>
-            <p className="text-gray-400 text-sm mb-2">
-              Windows 10/11 only. Download the ZIP, extract it, then read the
-              <strong className="text-white"> READ-ME-FIRST.txt</strong> file inside before installing.
+            <p className="text-gray-400 text-sm mb-4">
+              Windows 10/11 only. Download the ZIP, extract it, and follow the instructions in the
+              <strong className="text-white"> READ-ME-FIRST.txt</strong> file inside.
             </p>
             {isActive ? (
               <a
-                href="https://github.com/aiaverainfotech-cyber/applywhileyousleep-website/releases/download/v1.0.2/ApplyWhileYouSleep-v1.0.2.zip"
+                href="https://github.com/aiaverainfotech-cyber/applywhileyousleep-website/releases/download/v1.0.2.zip/ApplyWhileYouSleep-v1.0.2.zip"
                 className="inline-block px-6 py-3 bg-blue-600 hover:bg-blue-500 rounded-lg font-semibold transition"
               >
                 Download for Windows v1.0.2 (.zip)
@@ -183,9 +183,7 @@ export default function DashboardPage() {
             <h2 className="text-lg font-semibold mb-4">Setup Instructions</h2>
             <ol className="space-y-3 text-sm text-gray-300 list-decimal list-inside">
               <li>Download the ZIP and extract it to any folder</li>
-              <li>Open the extracted folder and read <code className="text-yellow-300">READ-ME-FIRST.txt</code></li>
-              <li>Right-click <code className="text-blue-300">ApplyWhileYouSleep-Setup.exe</code> and click <strong>Properties</strong></li>
-              <li>At the bottom of Properties, tick the <strong>Unblock</strong> checkbox, then click <strong>Apply</strong> and <strong>OK</strong></li>
+              <li>Open the extracted folder and read <code className="text-yellow-300">READ-ME-FIRST.txt</code> for important setup steps</li>
               <li>Double-click <code className="text-blue-300">ApplyWhileYouSleep-Setup.exe</code> to install</li>
               <li>On first launch, enter your license key: <code className="text-blue-300">{user.license_key}</code></li>
               <li>Upload your resume or fill your profile manually.</li>
