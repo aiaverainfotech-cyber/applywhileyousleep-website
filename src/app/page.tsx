@@ -46,7 +46,7 @@ export default function LandingPage() {
               Login
             </Link>
             <Link href="/auth/signup" className="px-4 py-2 bg-blue-600 hover:bg-blue-500 rounded-lg text-sm font-semibold transition">
-              Get Started Free
+              Get Started
             </Link>
           </div>
         </div>
