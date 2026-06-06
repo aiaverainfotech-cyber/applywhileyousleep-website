@@ -169,10 +169,10 @@ export default function DashboardPage() {
             </p>
             {isActive ? (
               <a
-                href="https://github.com/aiaverainfotech-cyber/applywhileyousleep-website/releases/download/v1.0.2.zip/ApplyWhileYouSleep-v1.0.2.zip"
+                href="https://github.com/aiaverainfotech-cyber/applywhileyousleep-website/releases/download/v1.3.3.zip/ApplyWhileYouSleep-v1.3.3.zip"
                 className="inline-block px-6 py-3 bg-blue-600 hover:bg-blue-500 rounded-lg font-semibold transition"
               >
-                Download for Windows v1.0.2 (.zip)
+                Download for Windows v1.3.3 (.zip)
               </a>
             ) : (
               <div className="text-gray-500 text-sm">Activate your subscription to unlock the download.</div>
