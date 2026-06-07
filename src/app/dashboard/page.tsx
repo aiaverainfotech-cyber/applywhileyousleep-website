@@ -167,12 +167,20 @@ export default function DashboardPage() {
               Windows 10/11 only. Download the installer and double-click it — everything installs automatically.
             </p>
             {isActive ? (
-              <a
-                href="https://github.com/aiaverainfotech-cyber/applywhileyousleep-website/releases/download/v1.3.3/ApplyWhileYouSleep-Install.bat"
-                className="inline-block px-6 py-3 bg-blue-600 hover:bg-blue-500 rounded-lg font-semibold transition"
-              >
-                Download Installer for Windows (.bat)
-              </a>
+              <div className="flex flex-col sm:flex-row gap-3">
+                <a
+                  href="https://github.com/aiaverainfotech-cyber/applywhileyousleep-website/releases/download/v1.3.3/ApplyWhileYouSleep-Install.bat"
+                  className="inline-block px-6 py-3 bg-blue-600 hover:bg-blue-500 rounded-lg font-semibold transition text-center"
+                >
+                  Download Installer for Windows (.bat)
+                </a>
+                <a
+                  href="https://github.com/aiaverainfotech-cyber/applywhileyousleep-website/releases/download/v1.3.3/READ-ME-FIRST.txt"
+                  className="inline-block px-6 py-3 bg-gray-700 hover:bg-gray-600 rounded-lg font-semibold transition text-center text-sm"
+                >
+                  READ-ME-FIRST.txt (Instructions)
+                </a>
+              </div>
             ) : (
               <div className="text-gray-500 text-sm">Activate your subscription to unlock the download.</div>
             )}
