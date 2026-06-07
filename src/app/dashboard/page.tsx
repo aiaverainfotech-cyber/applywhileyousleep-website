@@ -164,15 +164,14 @@ export default function DashboardPage() {
           <div className="bg-gray-900 border border-gray-800 rounded-xl p-6">
             <h2 className="text-lg font-semibold mb-1">Download the App</h2>
             <p className="text-gray-400 text-sm mb-4">
-              Windows 10/11 only. Download the ZIP, extract it, and follow the instructions in the
-              <strong className="text-white"> READ-ME-FIRST.txt</strong> file inside.
+              Windows 10/11 only. Download the installer and double-click it — everything installs automatically.
             </p>
             {isActive ? (
               <a
-                href="https://github.com/aiaverainfotech-cyber/applywhileyousleep-website/releases/download/v1.3.3.zip/ApplyWhileYouSleep-v1.3.3.zip"
+                href="https://github.com/aiaverainfotech-cyber/applywhileyousleep-website/releases/download/v1.3.3/ApplyWhileYouSleep-Install.bat"
                 className="inline-block px-6 py-3 bg-blue-600 hover:bg-blue-500 rounded-lg font-semibold transition"
               >
-                Download for Windows v1.3.3 (.zip)
+                Download Installer for Windows (.bat)
               </a>
             ) : (
               <div className="text-gray-500 text-sm">Activate your subscription to unlock the download.</div>
@@ -182,9 +181,9 @@ export default function DashboardPage() {
           <div className="bg-gray-900 border border-gray-800 rounded-xl p-6">
             <h2 className="text-lg font-semibold mb-4">Setup Instructions</h2>
             <ol className="space-y-3 text-sm text-gray-300 list-decimal list-inside">
-              <li>Download the ZIP and extract it to any folder</li>
-              <li>Open the extracted folder and read <code className="text-yellow-300">READ-ME-FIRST.txt</code> for important setup steps</li>
-              <li>Double-click <code className="text-blue-300">ApplyWhileYouSleep-Setup.exe</code> to install</li>
+              <li>Click <strong>Download Installer</strong> above — saves <code className="text-blue-300">ApplyWhileYouSleep-Install.bat</code></li>
+              <li>Double-click the downloaded file to run the installer</li>
+              <li>The installer sets up everything automatically (Python, Node.js, app files)</li>
               <li>On first launch, enter your license key: <code className="text-blue-300">{user.license_key}</code></li>
               <li>Upload your resume or fill your profile manually.</li>
               <li>Click the Login Setup tab to log into LinkedIn and Naukri.</li>
